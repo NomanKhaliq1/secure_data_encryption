@@ -1,19 +1,15 @@
-# app.py — Clear Options UI (Generate/Paste/Upload Key + Text/File Encrypt/Decrypt)
+
 import streamlit as st
 from cryptography.fernet import Fernet, InvalidToken
 
 st.set_page_config(page_title="Encrypt/Decrypt", page_icon="🔒", layout="centered")
 st.title("🔒 Encrypt / Decrypt")
 
-# ----------------------------
-# Session
-# ----------------------------
+
 if "key" not in st.session_state:
     st.session_state.key = None
 
-# ----------------------------
-# Helpers
-# ----------------------------
+
 def show_key():
     if st.session_state.key:
         st.code(st.session_state.key.decode(), language="plaintext")
@@ -25,9 +21,7 @@ def need_key():
         return True
     return False
 
-# ----------------------------
-# STEP 1 — Key Method
-# ----------------------------
+
 st.header("Step 1: Choose Key Method")
 
 key_method = st.radio(
@@ -66,7 +60,7 @@ elif key_method == "Paste":
         st.info("Key cleared from session.")
     show_key()
 
-else:  # Upload
+else:  
     uploaded_key = st.file_uploader("Upload key.txt", type=["txt"], key="key_file")
     btn_cols = st.columns(2)
     if btn_cols[0].button("Use Uploaded Key", use_container_width=True, key="btn_use_upload"):
@@ -87,17 +81,13 @@ else:  # Upload
 
 st.divider()
 
-# ----------------------------
-# STEP 2 — Action Type & Mode
-# ----------------------------
+
 st.header("Step 2: What do you want to work on?")
 
 action_type = st.radio("Pick data type", ["Text", "File"], horizontal=True, key="action_type")
 mode = st.radio("Pick mode", ["Encrypt", "Decrypt"], horizontal=True, key="mode")
 
-# ----------------------------
-# TEXT WORKFLOW
-# ----------------------------
+
 if action_type == "Text":
     help_txt = "Type plain text to encrypt" if mode == "Encrypt" else "Paste encrypted token to decrypt"
     text_input = st.text_area("Text", height=160, placeholder=help_txt, key="text_box")
@@ -127,9 +117,7 @@ if action_type == "Text":
             except Exception as e:
                 st.error(f"Failed: {e}")
 
-# ----------------------------
-# FILE WORKFLOW
-# ----------------------------
+
 else:
     file_help = "Upload any file to encrypt" if mode == "Encrypt" else "Upload the .enc file to decrypt"
     up = st.file_uploader(file_help, type=None, key="file_box")
