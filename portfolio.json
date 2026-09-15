@@ -1,0 +1,16 @@
+{
+  "title": "Secure Data Encryption",
+  "description": "Streamlit tool for symmetric encryption and decryption using Fernet, with key generation and key file download.",
+  "techTags": [
+    "Python",
+    "Streamlit",
+    "cryptography"
+  ],
+  "source": "github",
+  "category": "Python",
+  "live_url": "",
+  "repo_name": "secure_data_encryption",
+  "repo_link": true,
+  "image": "",
+  "fetch": false
+}
